@@ -1,0 +1,647 @@
+{
+  "schemaVersion": "1.3",
+  "rubricVersion": "4.0",
+  "reviewDate": "2026-10-12",
+  "sources": [
+    {
+      "file": "Compared_All_Platforms_TH_v4.0.xlsx",
+      "sha256": "0cb2b31f0da1605537839ecfd153c99ddfcf50977d892c8d15cd3bb2bd6310f6",
+      "bytes": 1537432
+    },
+    {
+      "file": "Compared_All_Platforms_TH_v4.0.docx",
+      "sha256": "3689d65849c9246b391d218b26ce8c25f1103082bd09277c2b499c1ce3cad3fc",
+      "bytes": 107635
+    }
+  ],
+  "counts": {
+    "catalogRecords": 233,
+    "rawSourceRecords": 248,
+    "legacySourceRecords": 177,
+    "avSourceRecords": 71,
+    "newRetainedRecords": 56,
+    "aliasesMerged": 15,
+    "coreLedgerRows": 3728,
+    "labeledProfile": 229,
+    "unlabeledProfile": 4
+  },
+  "validation": {
+    "uniqueIds": true,
+    "coreKeysPerRecord": 16,
+    "cachedScoreMismatches": 0,
+    "scoreValidation": "All 233 lower/upper/resolved outputs independently recalculated from effective core states and match workbook caches within 1e-8."
+  },
+  "scope": "Merge two inventories and apply the v4 Word rubric to documentation evidence. Unit: one identified dataset/release record, not one hosted URL or one independent acquisition corpus.",
+  "limitations": "Ten candidates and the CAMBER Video 1 scope check have fresh primary-documentation assessments. CrackBlock also has a fresh D4 check. Other assessments reinterpret the source workbooks evidence snapshots. All are AI provisional; no payload inspection, independent human rating or successful retrieval is claimed. Each core decision has a source, locator, summary and rationale.",
+  "vehicleCoverage": [
+    {
+      "Vehicle / company": "Tesla",
+      "Finding": "Third-party Tesla camera datasets found; no qualifying Tesla corporate pavement-labeled release located as of 2026-10-11",
+      "Dataset lead": "NATIX Multi-Camera, Edge Case and Safety Critical Driving Events",
+      "Footage status": "Public gated Tesla-dashcam footage from everyday owners; not a Tesla Inc. training-data release",
+      "Pavement labels": "NATIX Edge Case has VLM road-surface deterioration events; manually validate",
+      "Limitation": "Tesla publishes tools to read owner footage/Autopilot metadata: https://github.com/teslamotors/dashcam . Tools are not a footage dataset.",
+      "Source link": "Source",
+      "Source review date": "2026-10-11T12:00:00",
+      "_row": 6,
+      "Source URL": null
+    },
+    {
+      "Vehicle / company": "Waymo",
+      "Finding": "Official Perception and End-to-End camera datasets available",
+      "Dataset lead": "Waymo Open Dataset - Perception and End-to-End",
+      "Footage status": "Raw camera sequences; mixed manual/autonomous modes cannot be separated",
+      "Pavement labels": "Road/lane segmentation and map features, but no pavement distress or severity labels documented",
+      "Limitation": "Motion dataset is not a raw-footage substitute: camera tokens/embeddings only. https://waymo.com/intl/it/open/data/motion/",
+      "Source link": "Source",
+      "Source review date": "2026-10-11T12:00:00",
+      "_row": 7,
+      "Source URL": null
+    },
+    {
+      "Vehicle / company": "Aurora truck",
+      "Finding": "No qualifying public Aurora truck-camera dataset located as of 2026-10-11",
+      "Dataset lead": "Aurora Multi-Sensor / Pit30M exists, from historical Uber ATG vehicle collection",
+      "Footage status": "Public cameras available in Pit30M; not identified as Aurora truck recordings",
+      "Pavement labels": "No distress/severity annotations documented; weather/segmentation metadata only",
+      "Limitation": "Use MAN TruckScenes or Torc TruckDrive as verified truck-camera alternatives. Do not relabel Pit30M as truck footage.",
+      "Source link": "Source",
+      "Source review date": "2026-10-11T12:00:00",
+      "_row": 8,
+      "Source URL": null
+    },
+    {
+      "Vehicle / company": "Rivian EDV",
+      "Finding": "No qualifying public Rivian EDV footage dataset located as of 2026-10-11",
+      "Dataset lead": "None located in public dataset repositories or Rivian sources searched",
+      "Footage status": "Rivian describes internal ADAS filming/annotation; this is not a public data-download offer",
+      "Pavement labels": "No publicly downloadable paired EDV pavement-condition labels located",
+      "Limitation": "Absence from this search is not proof that no dataset exists. Generic Rivian road footage, demos and EDV carbon-footprint datasets are not qualifying camera research datasets.",
+      "Source link": "Source",
+      "Source review date": "2026-10-11T12:00:00",
+      "_row": 9,
+      "Source URL": null
+    },
+    {
+      "Vehicle / company": "MAN Truck & Bus",
+      "Finding": "Official public truck camera dataset available",
+      "Dataset lead": "MAN TruckScenes",
+      "Footage status": "Real development-truck camera sequences",
+      "Pavement labels": "Weather tags, no documented distress labels",
+      "Limitation": "Useful truck-specific alternative with calibration and synchronized ranging sensors.",
+      "Source link": "Source",
+      "Source review date": "2026-10-11T12:00:00",
+      "_row": 10,
+      "Source URL": null
+    },
+    {
+      "Vehicle / company": "Torc Robotics",
+      "Finding": "Public truck camera dataset available",
+      "Dataset lead": "TruckDrive (CVPR 2026)",
+      "Footage status": "Real semi-truck multimodal highway sequences",
+      "Pavement labels": "No pavement-condition label schema documented",
+      "Limitation": "Long-range perception benchmark; data license has separate noncommercial/commercial files.",
+      "Source link": "Source",
+      "Source review date": "2026-10-11T12:00:00",
+      "_row": 11,
+      "Source URL": null
+    },
+    {
+      "Vehicle / company": "Tesla-related historical lead: DeepTesla",
+      "Finding": "Historical MIT 6.S094 Tesla dashcam/steering set; current original release unavailable in this check",
+      "Dataset lead": "DeepTesla (archived forks exist)",
+      "Footage status": "Original lexfridman/deeptesla URL returned 404; complete authorized video download not verified",
+      "Pavement labels": "Steering labels, no pavement-condition labels",
+      "Limitation": "Keep as an access-verification lead rather than count it as a confirmed available dataset. Not an official Tesla dataset.",
+      "Source link": "Source",
+      "Source review date": "2026-10-11T12:00:00",
+      "_row": 12,
+      "Source URL": null
+    }
+  ],
+  "relationships": [
+    {
+      "Related dataset IDs": "DS-003; DS-025; DS-090",
+      "Relationship": "Same acquisition lineage; different archives/releases",
+      "Resolution": "Keep separate",
+      "Reason": "CiCS, LEiS and CrackBlock600k share author/acquisition lineage, but different named archives and representations. A common repository does not establish duplicate release identity.",
+      "Evidence links": "https://github.com/DrEdwardLee/Pavement-Crack-Dataset",
+      "_row": 6
+    },
+    {
+      "Related dataset IDs": "DS-007; DS-018",
+      "Relationship": "Shared host; distinct data",
+      "Resolution": "Keep separate",
+      "Reason": "CRACK500 and GAPs384 use a shared benchmark repository but different acquisition corpora.",
+      "Evidence links": "https://github.com/fyangneil/pavement-crack-detection",
+      "_row": 7
+    },
+    {
+      "Related dataset IDs": "DS-009; DS-013; DS-014",
+      "Relationship": "Shared host; distinct data",
+      "Resolution": "Keep separate",
+      "Reason": "CrackLS315, CrackTree260 and CRKWH100 are distinct named benchmarks in a shared repository.",
+      "Evidence links": "https://github.com/qinnzou/DeepCrack",
+      "_row": 8
+    },
+    {
+      "Related dataset IDs": "DS-022; DS-023; DS-113; DS-114",
+      "Relationship": "Related infrared dataset releases",
+      "Resolution": "Keep separate",
+      "Reason": "Different DOI deposits and annotation tasks; retain separate task-specific releases.",
+      "Evidence links": "https://github.com/lfangyu09/IR-Crack-detection",
+      "_row": 9
+    },
+    {
+      "Related dataset IDs": "DS-037; DS-038; DS-034; DS-035",
+      "Relationship": "Successive RDD releases",
+      "Resolution": "Keep separate",
+      "Reason": "RDD2018, 2019, 2020 and 2022 share lineage but differ by release. Never sum their counts as independent imagery.",
+      "Evidence links": "https://github.com/sekilab/RoadDamageDetector",
+      "_row": 10
+    },
+    {
+      "Related dataset IDs": "DS-035; DS-072; DS-095; DS-099; DS-132; DS-162; DS-104; DS-105",
+      "Relationship": "Derived/compiled RDD family",
+      "Resolution": "Keep separate",
+      "Reason": "Re-labeling, filtering, severity, pseudo-label and compiled releases have different targets; preserve relation and audit leakage before cross-dataset evaluation.",
+      "Evidence links": null,
+      "_row": 11
+    },
+    {
+      "Related dataset IDs": "DS-059; DS-060",
+      "Relationship": "Same frames; new annotations",
+      "Resolution": "Keep separate",
+      "Reason": "CoCG axis-aligned detection and oriented boxes are distinct annotation releases, not independent footage.",
+      "Evidence links": null,
+      "_row": 12
+    },
+    {
+      "Related dataset IDs": "DS-007; DS-062",
+      "Relationship": "Parent and noisy-mask derivative",
+      "Resolution": "Keep separate",
+      "Reason": "CRACK500 noisy masks are a distinct annotation study release with shared underlying images.",
+      "Evidence links": null,
+      "_row": 13
+    },
+    {
+      "Related dataset IDs": "DS-007; DS-008; DS-011; DS-016; DS-142",
+      "Relationship": "Compiled crack ancestry",
+      "Resolution": "Keep separate",
+      "Reason": "CrackSeg9k and CombinedCrack aggregate earlier crack corpora. Keep compiled release identities, flag shared ancestry for train/test audits.",
+      "Evidence links": null,
+      "_row": 14
+    },
+    {
+      "Related dataset IDs": "DS-040; DS-181",
+      "Relationship": "Subset and parent sequence release",
+      "Resolution": "Keep separate",
+      "Reason": "701-image RTK segmentation is distinct from larger RTK raw sequences / surface-quality classification; overlapping collection and different labels.",
+      "Evidence links": "https://data.mendeley.com/datasets/hssswvmjwf/1; https://lapix.ufsc.br/pesquisas/projeto-veiculo-autonomo/datasets/?lang=en",
+      "_row": 15
+    },
+    {
+      "Related dataset IDs": "DS-018; DS-193; DS-194",
+      "Relationship": "GAPs family; distinct releases",
+      "Resolution": "Keep separate",
+      "Reason": "GAPs384 crack masks, GAPs10m semantic segmentation and GAPsv2 classification/detection are different release scopes. Shared imagery lineage must not be treated as independent.",
+      "Evidence links": null,
+      "_row": 16
+    },
+    {
+      "Related dataset IDs": "DS-043; DS-157; DS-079; DS-040",
+      "Relationship": "Stereo pothole / compiled ancestry",
+      "Resolution": "Keep separate",
+      "Reason": "Pothole-600 official site links its Kaggle mirror, while 2019 Stereo Pothole Datasets have separate paper and packaging. Pothole Mix compiles published sources plus new clips. Exact cross-release frame overlap unverified.",
+      "Evidence links": "https://github.com/ruirangerfan/stereo_pothole_datasets; https://sites.google.com/view/pothole-600/dataset; https://data.mendeley.com/datasets/kfth5g2xk3/2",
+      "_row": 17
+    },
+    {
+      "Related dataset IDs": "DS-093; DS-094; DS-153",
+      "Relationship": "Similar labels; different upstream projects",
+      "Resolution": "Keep separate",
+      "Reason": "Different Roboflow project identifiers and annotation export scopes. Do not merge based on the generic pothole segmentation name.",
+      "Evidence links": "https://huggingface.co/datasets/keremberke/pothole-segmentation; https://huggingface.co/datasets/manot/pothole-segmentation2/raw/main/pothole-segmentation2.py",
+      "_row": 18
+    },
+    {
+      "Related dataset IDs": "DS-138; DS-149",
+      "Relationship": "Possible shared MakeML source",
+      "Resolution": "Keep separate",
+      "Reason": "Both may trace to MakeML, but DS138 adds size categories/splits. No verified identical release manifest; retain separate and audit image hashes before independence claims.",
+      "Evidence links": null,
+      "_row": 19
+    },
+    {
+      "Related dataset IDs": "DS-147; DS-167",
+      "Relationship": "Possible shared South African source",
+      "Resolution": "Keep separate",
+      "Reason": "Both cite South African pothole imagery; classification challenge and bounding-box packaging differ. Exact overlap unverified; retain separate.",
+      "Evidence links": null,
+      "_row": 20
+    },
+    {
+      "Related dataset IDs": "DS-129; DS-170",
+      "Relationship": "Possible mirror; identity unresolved",
+      "Resolution": "Keep separate",
+      "Reason": "Matching generic 3-class descriptions/resolution are insufficient provenance proof. Keep separate, high-priority ancestry follow-up.",
+      "Evidence links": null,
+      "_row": 21
+    },
+    {
+      "Related dataset IDs": "DS-135; DS-175",
+      "Relationship": "Parent and segmentation derivative",
+      "Resolution": "Keep separate",
+      "Reason": "UAV-SEG/Enhanced UAV-PDD is a derived annotation release. Legacy DS175 preferred parent Zenodo URL is insufficient to identify derivative; use its Kaggle record and verify access.",
+      "Evidence links": "https://www.kaggle.com/datasets/patelravi07/enhanced-uav-pdd",
+      "_row": 22
+    },
+    {
+      "Related dataset IDs": "DS-178; DS-217; DS-218",
+      "Relationship": "Shared capture family; distinct NATIX subsets",
+      "Resolution": "Keep separate",
+      "Reason": "Edge-case, multi-camera and safety-critical packages are different released subsets; shared Tesla capture ecosystem is not proof of all clips duplicating. Check trip/frame IDs before combined use.",
+      "Evidence links": null,
+      "_row": 23
+    },
+    {
+      "Related dataset IDs": "DS-189; DS-233",
+      "Relationship": "Parent and labeled point-cloud subset",
+      "Resolution": "Keep separate",
+      "Reason": "RSRD-seg is a small labeled subset of RSRD; separate modalities/task labels. Shared download portal is not duplicate identity.",
+      "Evidence links": "https://thu-rsxd.com/rsrd/; https://thu-rsxd.com/rsrd_segmentation/",
+      "_row": 24
+    },
+    {
+      "Related dataset IDs": "DS-185; DS-186",
+      "Relationship": "Related surface-state datasets",
+      "Resolution": "Keep separate",
+      "Reason": "RoadSaW wetness/material and RoadSC snow cover use complementary label definitions, not aliases.",
+      "Evidence links": null,
+      "_row": 25
+    },
+    {
+      "Related dataset IDs": "DS-201; DS-202; DS-203",
+      "Relationship": "Argoverse family; distinct releases/tasks",
+      "Resolution": "Keep separate",
+      "Reason": "Argoverse1, Argoverse2 Sensor and Map Change serve different release scopes. AV2 Map Change may reuse Sensor frames; record exact overlap before pooled evaluation.",
+      "Evidence links": null,
+      "_row": 26
+    },
+    {
+      "Related dataset IDs": "DS-214; DS-215",
+      "Relationship": "KITTI family; distinct acquisitions",
+      "Resolution": "Keep separate",
+      "Reason": "KITTI Raw and KITTI-360 are separate data acquisitions. Preserve named-release boundary.",
+      "Evidence links": null,
+      "_row": 27
+    },
+    {
+      "Related dataset IDs": "DS-219; DS-220; DS-221",
+      "Relationship": "Motional family; distinct datasets",
+      "Resolution": "Keep separate",
+      "Reason": "nuImages, nuPlan sensor release and nuScenes have distinct published scope; brand/platform sharing does not merge dataset identity.",
+      "Evidence links": null,
+      "_row": 28
+    },
+    {
+      "Related dataset IDs": "DS-230; DS-231",
+      "Relationship": "Waymo family; distinct tasks/releases",
+      "Resolution": "Keep separate",
+      "Reason": "End-to-End Driving and Perception releases use separate release formats and target annotations; common download portal not duplicate proof.",
+      "Evidence links": null,
+      "_row": 29
+    },
+    {
+      "Related dataset IDs": "DS-195; DS-196; DS-092",
+      "Relationship": "Mapillary image source family",
+      "Resolution": "Keep separate",
+      "Reason": "Vistas, StreetSurfaceVis and global-potholes use Mapillary-related imagery but different selected records/annotations. Shared provider is not sufficient for deduplication; inspect image IDs.",
+      "Evidence links": null,
+      "_row": 30
+    }
+  ],
+  "top10Review": [
+    {
+      "Priority": 1,
+      "Dataset ID": "DS-084",
+      "Dataset": "SDNET2018 — pavement subset",
+      "Representation": "Binary image classification",
+      "Lower /100": 88.88888888888887,
+      "Upper /100": 99.99999999999999,
+      "Resolved share": 0.8888888888888888,
+      "Dataset link": "Dataset",
+      "Paper / evidence": "Evidence",
+      "Why selected": "Compact class-folder example; checks whether pavement crops are distinguished from walls/decks and original captures.",
+      "First manual action": "Open USU Methodology and ReadMe; identify pavement C/U folders; then inspect one cracked and one uncracked crop.",
+      "Release / scope": "USU SDNET2018 deposit, 2018; pavement subset within full release",
+      "Known limitation": "Whole-deposit count is not pavement-only count; related crops are not independent images. No payload inspection.",
+      "Review status": "Not started",
+      "Review inputs": "Enter review",
+      "Check evidence": "Check evidence",
+      "_row": 6
+    },
+    {
+      "Priority": 2,
+      "Dataset ID": "DS-007",
+      "Dataset": "CRACK500",
+      "Representation": "Crack segmentation",
+      "Lower /100": 77.77777777777777,
+      "Upper /100": 99.99999999999999,
+      "Resolved share": 0.7777777777777777,
+      "Dataset link": "Dataset",
+      "Paper / evidence": "Evidence",
+      "Why selected": "Small original corpus with clear original-image/crop distinction; useful calibration for sampling and ancestry.",
+      "First manual action": "Read paper IV-B1; verify 500 original images versus 3,368 retained crops and map one image to its binary mask.",
+      "Release / scope": "FPHBN documented CRACK500 split, 2019 paper / author repository",
+      "Known limitation": "Repository bundles other datasets. Do not count companion corpora as CRACK500. Data terms and label QA remain unresolved.",
+      "Review status": "Not started",
+      "Review inputs": "Enter review",
+      "Check evidence": "Check evidence",
+      "_row": 7
+    },
+    {
+      "Priority": 3,
+      "Dataset ID": "DS-035",
+      "Dataset": "RDD2022",
+      "Representation": "Multicountry distress detection",
+      "Lower /100": 94.44444444444443,
+      "Upper /100": 99.99999999999999,
+      "Resolved share": 0.9444444444444443,
+      "Dataset link": "Dataset",
+      "Paper / evidence": "Evidence",
+      "Why selected": "Well-documented detection exemplar with country subsets, label map and download manifest.",
+      "First manual action": "Open label_map.pbtxt and directory structure; inspect one public training XML; note test annotations are withheld.",
+      "Release / scope": "Figshare version 1, DOI 10.6084/m9.figshare.21431547.v1",
+      "Known limitation": "Contains earlier RDD lineage. Country folders do not prove route-independent splits; third-party rights require separate reuse check.",
+      "Review status": "Not started",
+      "Review inputs": "Enter review",
+      "Check evidence": "Check evidence",
+      "_row": 8
+    },
+    {
+      "Priority": 4,
+      "Dataset ID": "DS-096",
+      "Dataset": "PaveBench / PaveVQA",
+      "Representation": "Multitask perception and vision-language",
+      "Lower /100": 99.99999999999999,
+      "Upper /100": 99.99999999999999,
+      "Resolved share": 0.9999999999999999,
+      "Dataset link": "Dataset",
+      "Paper / evidence": "Evidence",
+      "Why selected": "Meeting-critical example; public task tree makes differences among classification, detection, masks and VQA easy to check.",
+      "First manual action": "Compare six classification categories with merged detection/segmentation classes; inspect label_map.txt and one QA record.",
+      "Release / scope": "Hugging Face MML-Group/PaveBench, current card snapshot 2026-10-11",
+      "Known limitation": "Documentation-only pass does not validate mask accuracy, physical metrology, benchmark independence or maintenance outcomes.",
+      "Review status": "Not started",
+      "Review inputs": "Enter review",
+      "Check evidence": "Check evidence",
+      "_row": 9
+    },
+    {
+      "Priority": 5,
+      "Dataset ID": "DS-011",
+      "Dataset": "CrackSeg9k",
+      "Representation": "Compiled derivative and lineage audit",
+      "Lower /100": 58.33333333333332,
+      "Upper /100": 99.99999999999999,
+      "Resolved share": 0.5833333333333334,
+      "Dataset link": "Dataset",
+      "Paper / evidence": "Evidence",
+      "Why selected": "Deliberate derivative exemplar exposes parent overlap, annotation transformations and changed release counts.",
+      "First manual action": "Open author README V4 instructions; reconcile approximately 9,160 current images with 9,255 in the paper; inspect parent prefixes.",
+      "Release / scope": "Author-recommended Dataverse V4, June 2024; release content requires reconciliation",
+      "Known limitation": "Shares parents with SDNET2018 and CRACK500 in this shortlist. Not an independent external test. V4 payload not inspected.",
+      "Review status": "Not started",
+      "Review inputs": "Enter review",
+      "Check evidence": "Check evidence",
+      "_row": 10
+    },
+    {
+      "Priority": 6,
+      "Dataset ID": "DS-135",
+      "Dataset": "UAV-PDD2023",
+      "Representation": "UAV distress detection",
+      "Lower /100": 99.99999999999999,
+      "Upper /100": 99.99999999999999,
+      "Resolved share": 0.9999999999999999,
+      "Dataset link": "Dataset",
+      "Paper / evidence": "Evidence",
+      "Why selected": "Stable DOI and compact data paper provide an accessible UAV example with concrete label-overlay verification.",
+      "First manual action": "Open paper Figures 2–3 and XML example; verify six class codes, 2,440 images and one image-label overlay.",
+      "Release / scope": "Zenodo v4, 2023-10-11; DOI 10.5281/zenodo.8429208",
+      "Known limitation": "Images include crops and augmentation. Random splits do not establish original-frame independence; route groups remain unverified.",
+      "Review status": "Not started",
+      "Review inputs": "Enter review",
+      "Check evidence": "Check evidence",
+      "_row": 11
+    },
+    {
+      "Priority": 7,
+      "Dataset ID": "DS-157",
+      "Dataset": "Pothole-600",
+      "Representation": "RGB and transformed-disparity segmentation",
+      "Lower /100": 55.55555555555556,
+      "Upper /100": 99.99999999999999,
+      "Resolved share": 0.5555555555555556,
+      "Dataset link": "Dataset",
+      "Paper / evidence": "Evidence",
+      "Why selected": "Manageable multimodal exemplar with 600 paired items and a clear source site; useful contrast between imagery and metrology.",
+      "First manual action": "Follow official Dataset page to Drive/Kaggle; match one RGB image, transformed disparity and mask; confirm data terms.",
+      "Release / scope": "Author Pothole-600 release accompanying ECCV Workshops 2020",
+      "Known limitation": "Distinguish from separate 2019 Stereo Pothole Datasets. Transformation is not calibrated pothole depth; license/QA/location remain unresolved.",
+      "Review status": "Not started",
+      "Review inputs": "Enter review",
+      "Check evidence": "Check evidence",
+      "_row": 12
+    },
+    {
+      "Priority": 8,
+      "Dataset ID": "DS-160",
+      "Dataset": "PVS — Passive Vehicular Sensors",
+      "Representation": "Inertial sensors and roughness categories",
+      "Lower /100": 75,
+      "Upper /100": 99.99999999999999,
+      "Resolved share": 0.75,
+      "Dataset link": "Dataset",
+      "Paper / evidence": "Evidence",
+      "Why selected": "Nine-run example makes non-image units, sensor rates and category-versus-measured-IRI distinction practical to review.",
+      "First manual action": "Read sensor and run tables; check one dataset_labels.csv with its GPS record and environmental-video timestamp.",
+      "Release / scope": "Nine-run PVS family; author README snapshot 2026-10-11",
+      "Known limitation": "Three vehicle/driver pairs are confounded. Roughness classes are not measured IRI. Missing codes, label QA and terms scope need confirmation.",
+      "Review status": "Not started",
+      "Review inputs": "Enter review",
+      "Check evidence": "Check evidence",
+      "_row": 13
+    },
+    {
+      "Priority": 9,
+      "Dataset ID": "DS-047",
+      "Dataset": "LTPP — Long-Term Pavement Performance",
+      "Representation": "Engineering measurements and longitudinal sections",
+      "Lower /100": 83.33333333333331,
+      "Upper /100": 99.99999999999999,
+      "Resolved share": 0.8333333333333333,
+      "Dataset link": "Dataset",
+      "Paper / evidence": "Evidence",
+      "Why selected": "Essential engineering contrast; manual pilot can focus on one section and measurement table rather than the entire database.",
+      "First manual action": "Confirm SDR selection, open LTPPDD and MON_DIS_AC_REV definitions, then inspect one section/date with null-versus-zero handling.",
+      "Release / scope": "SDR39 context retained from v4; current portal identifies SDR40 as latest; selection pending",
+      "Known limitation": "Release-specific counts/distributions and schema continuity remain pending; 2021 guide is context, not proof of SDR39/40 completeness.",
+      "Review status": "Not started",
+      "Review inputs": "Enter review",
+      "Check evidence": "Check evidence",
+      "_row": 14
+    },
+    {
+      "Priority": 10,
+      "Dataset ID": "DS-183",
+      "Dataset": "Zenseact Open Dataset — Frames",
+      "Representation": "AV fleet road wetness and snow classification",
+      "Lower /100": 88.88888888888887,
+      "Upper /100": 99.99999999999999,
+      "Resolved share": 0.8888888888888888,
+      "Dataset link": "Dataset",
+      "Paper / evidence": "Evidence",
+      "Why selected": "New AV-inventory exemplar with public samples, concise surface-label definitions and an SDK mini-download option.",
+      "First manual action": "Open Annotations → Road surface and Frames samples; verify wetness/snow labels in one Frame; check access route before retrieval.",
+      "Release / scope": "ZOD Frames public documentation snapshot 2026-10-11; distinguish Sequences/Drives",
+      "Known limitation": "Surface labels apply to Frames; do not infer labels on every video frame or autonomous engagement. Not crack/PCI ground truth.",
+      "Review status": "Not started",
+      "Review inputs": "Enter review",
+      "Check evidence": "Check evidence",
+      "_row": 15
+    }
+  ],
+  "platformSummary": [
+    {
+      "Platform": "GitHub",
+      "Retained dataset IDs": 57,
+      "Single-platform IDs": 44,
+      "Multiple-platform IDs": 13,
+      "_row": 6
+    },
+    {
+      "Platform": "Hugging Face",
+      "Retained dataset IDs": 30,
+      "Single-platform IDs": 25,
+      "Multiple-platform IDs": 5,
+      "_row": 7
+    },
+    {
+      "Platform": "Zenodo",
+      "Retained dataset IDs": 36,
+      "Single-platform IDs": 30,
+      "Multiple-platform IDs": 6,
+      "_row": 8
+    },
+    {
+      "Platform": "Kaggle",
+      "Retained dataset IDs": 49,
+      "Single-platform IDs": 36,
+      "Multiple-platform IDs": 13,
+      "_row": 9
+    },
+    {
+      "Platform": "Mendeley Data",
+      "Retained dataset IDs": 42,
+      "Single-platform IDs": 34,
+      "Multiple-platform IDs": 8,
+      "_row": 10
+    },
+    {
+      "Platform": "Data.gov",
+      "Retained dataset IDs": 1,
+      "Single-platform IDs": 0,
+      "Multiple-platform IDs": 1,
+      "_row": 11
+    },
+    {
+      "Platform": "Other official / repository",
+      "Retained dataset IDs": 46,
+      "Single-platform IDs": 38,
+      "Multiple-platform IDs": 8,
+      "_row": 12
+    },
+    {
+      "Platform": "Source rows",
+      "Retained dataset IDs": 248,
+      "Single-platform IDs": null,
+      "Multiple-platform IDs": null,
+      "_row": 15
+    },
+    {
+      "Platform": "Merged aliases",
+      "Retained dataset IDs": 15,
+      "Single-platform IDs": null,
+      "Multiple-platform IDs": null,
+      "_row": 16
+    },
+    {
+      "Platform": "Retained IDs",
+      "Retained dataset IDs": 233,
+      "Single-platform IDs": null,
+      "Multiple-platform IDs": null,
+      "_row": 17
+    },
+    {
+      "Platform": "New IDs from AV inventory",
+      "Retained dataset IDs": 56,
+      "Single-platform IDs": null,
+      "Multiple-platform IDs": null,
+      "_row": 18
+    },
+    {
+      "Platform": "One RSCD merge is probable. Related releases remain separate.",
+      "Retained dataset IDs": null,
+      "Single-platform IDs": null,
+      "Multiple-platform IDs": null,
+      "_row": 20
+    }
+  ],
+  "discoverySummary": [
+    {
+      "Reported discovery origin": "Claude",
+      "Retained v3 IDs": 132,
+      "Interpretation": "Original discovery attribution retained from v3.",
+      "_row": 6
+    },
+    {
+      "Reported discovery origin": "GPT",
+      "Retained v3 IDs": 65,
+      "Interpretation": "Original discovery attribution retained from v3.",
+      "_row": 7
+    },
+    {
+      "Reported discovery origin": "GitHub_Test_Batch (tool UNK)",
+      "Retained v3 IDs": 34,
+      "Interpretation": "Original discovery attribution retained from v3.",
+      "_row": 8
+    },
+    {
+      "Reported discovery origin": "CodeX",
+      "Retained v3 IDs": 13,
+      "Interpretation": "Original discovery attribution retained from v3.",
+      "_row": 9
+    },
+    {
+      "Reported discovery origin": "AV inventory",
+      "Retained v3 IDs": 71,
+      "Interpretation": "71 source rows map to 15 existing IDs and 56 new IDs. Tool attribution was not supplied.",
+      "_row": 10
+    },
+    {
+      "Reported discovery origin": "This v4 reassessment",
+      "Retained v3 IDs": 233,
+      "Interpretation": "AI-assisted rubric application. All human review inputs start blank.",
+      "_row": 11
+    },
+    {
+      "Reported discovery origin": "Top-ten primary-documentation checks",
+      "Retained v3 IDs": 10,
+      "Interpretation": "The ten review priorities were checked against primary documentation. No payload download or human sign-off.",
+      "_row": 12
+    }
+  ],
+  "methodDocumentScopeNote": "The Word file contains retained historical v2/v3 descriptions and future-work prose. Its revised v4 rules govern; the supplied v4 workbook contains the later inventory/scoring implementation. Historical examples were not reused as current scores."
+}

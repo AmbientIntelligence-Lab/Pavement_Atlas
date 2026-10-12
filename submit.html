@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Contribute pavement datasets to PaveData Atlas. Share source evidence, acquisition details and reuse terms for curator review.">
+  <title>Contribute a dataset · PaveData Atlas</title>
+  <link rel="stylesheet" href="src/submissions.css">
+  <script type="module" src="src/submissions.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to contribution form</a>
+<header class="site-header"><nav aria-label="Main navigation" class="nav-inner">
+  <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 20 5-16h4l5 16M12 7v3m0 4v3"/></svg></span>PaveData Atlas</a>
+  <div class="nav-links"><a href="index.html#register">Explore datasets</a><a href="schema.html">Metadata guide</a><a href="submit.html" aria-current="page">Contribute</a></div>
+</nav></header>
+<main id="main" class="page-shell">
+  <div class="page-intro"><a class="back-link" href="index.html">← Back to Atlas</a><h1>Share a dataset.<br>Strengthen the reference.</h1><p>Help researchers find pavement data they can understand and reuse. Submit a new resource or a correction, with the evidence our curators need to review it.</p></div>
+  <div class="contribution-layout">
+    <div>
+      <div class="delivery-note" id="delivery-note"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 6l8 7 8-7"/></svg><div><strong>Email preparation mode</strong><p>We will create an Excel file and a pre-addressed email. Attach the file and send it from your email app to complete your contribution.</p></div></div>
+      <noscript><p class="delivery-note">This form needs JavaScript to validate and create the Excel file. You can also email dataset details directly to <a href="mailto:tianzhi.he@ami-lab.com">tianzhi.he@ami-lab.com</a>.</p></noscript>
+      <form id="contribution-form" class="contribution-form">
+        <p class="required-note">Fields marked <span aria-label="required">*</span> are required. Use <strong>Unknown</strong> where evidence is unavailable.</p>
+        <fieldset><legend>About you</legend><p class="section-description">Your contact details go to the review team and are not added to the public catalog.</p>
+          <div class="field-grid">
+            <div class="field"><label for="contactName">Your name <span aria-hidden="true">*</span></label><input id="contactName" name="contactName" autocomplete="name" required maxlength="120"></div>
+            <div class="field"><label for="email">Email address <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" autocomplete="email" required maxlength="254"></div>
+            <div class="field full"><label for="affiliation">Institution or organization <span class="optional">optional</span></label><input id="affiliation" name="affiliation" autocomplete="organization" maxlength="180"></div>
+          </div>
+        </fieldset>
+        <fieldset><legend>The dataset</legend><p class="section-description">Link to the original resource. This helps us credit its creators and verify access.</p>
+          <div class="field-grid">
+            <div class="field full"><label for="submissionType">Contribution type</label><select id="submissionType" name="submissionType"><option value="New dataset">New dataset</option><option value="Correction to an existing record">Correction to an existing record</option></select></div>
+            <div class="field full"><label for="datasetName">Dataset name <span aria-hidden="true">*</span></label><input id="datasetName" name="datasetName" required maxlength="220" placeholder="Use the name given by the dataset creators"></div>
+            <div class="field full"><label for="sourceUrl">Primary paper or project page <span aria-hidden="true">*</span></label><input id="sourceUrl" name="sourceUrl" type="url" required maxlength="1500" placeholder="https://" aria-describedby="source-help"><small id="source-help">An original publication, repository or official dataset landing page.</small></div>
+            <div class="field full"><label for="accessUrl">Data access or download URL <span class="optional">optional</span></label><input id="accessUrl" name="accessUrl" type="url" maxlength="1500" placeholder="https://"><small>Use the access page if registration or a request is required.</small></div>
+            <div class="field"><label for="year">Release year <span aria-hidden="true">*</span></label><input id="year" name="year" required maxlength="7" placeholder="2025 or Unknown" pattern="[0-9]{4}|[Uu]nknown"></div>
+            <div class="field"><label for="license">License or reuse terms <span aria-hidden="true">*</span></label><input id="license" name="license" required maxlength="220" list="license-options" placeholder="CC BY 4.0, restricted, or Unknown"><datalist id="license-options"><option value="CC BY 4.0"><option value="CC BY-SA 4.0"><option value="CC BY-NC 4.0"><option value="CC0 1.0"><option value="Research use only"><option value="Permission required"><option value="Unknown"></datalist><small>A public download does not establish a reuse license.</small></div>
+            <div class="field full"><label for="authors">Dataset creators / authors <span class="optional">optional</span></label><input id="authors" name="authors" maxlength="600" placeholder="Names or research group"></div>
+            <div class="field"><label for="doi">DOI <span class="optional">optional</span></label><input id="doi" name="doi" maxlength="300" placeholder="10.xxxx/…"></div>
+            <div class="field"><label for="sourceStatus">Source status</label><select id="sourceStatus" name="sourceStatus"><option value="Unknown">Unknown</option><option value="Peer-reviewed">Peer-reviewed</option><option value="Preprint">Preprint</option><option value="Project release">Project release</option><option value="Community-contributed">Community-contributed</option></select></div>
+          </div>
+        </fieldset>
+        <fieldset><legend>Acquisition and annotations</legend><p class="section-description">Describe what was collected and how. These details support the Atlas's platform and suitability screening.</p>
+          <div class="field-grid">
+            <div class="field full"><label for="platform">Acquisition platform</label><select id="platform" name="platform"><option value="Unknown">Unknown</option><option value="Vehicle-mounted">Vehicle-mounted</option><option value="Smartphone">Smartphone</option><option value="Handheld camera">Handheld camera</option><option value="UAV / aerial">UAV / aerial</option><option value="Ground robot">Ground robot</option><option value="Specialized survey platform">Specialized survey platform</option><option value="Mixed / other">Mixed / other</option></select></div>
+            <div class="field"><label for="vehicleType">Vehicle / collection configuration</label><select id="vehicleType" name="vehicleType"><option value="Unknown / not applicable">Unknown / not applicable</option><option value="Conventional vehicle">Conventional vehicle</option><option value="ADAS / semi-autonomous vehicle">ADAS / semi-autonomous vehicle</option><option value="Autonomous research vehicle">Autonomous research vehicle</option><option value="Laboratory sensor vehicle">Laboratory sensor vehicle</option><option value="Road survey vehicle">Road survey vehicle</option><option value="Mobile robot">Mobile robot</option><option value="Other">Other</option></select></div>
+            <div class="field"><label for="viewpoint">Sensor viewpoint</label><select id="viewpoint" name="viewpoint"><option value="Unknown">Unknown</option><option value="Forward-facing">Forward-facing</option><option value="Downward-facing">Downward-facing</option><option value="Oblique">Oblique</option><option value="Aerial / overhead">Aerial / overhead</option><option value="Mixed">Mixed</option><option value="Not applicable">Not applicable</option></select></div>
+            <div class="field full"><label for="modalities">Sensors and data modalities <span class="optional">optional</span></label><input id="modalities" name="modalities" maxlength="500" placeholder="RGB images, stereo, LiDAR, thermal, IMU…"></div>
+            <div class="field"><label for="geography">Collection geography <span class="optional">optional</span></label><input id="geography" name="geography" maxlength="300" placeholder="Country / region; no private coordinates"></div>
+            <div class="field"><label for="size">Dataset size and resolution <span class="optional">optional</span></label><input id="size" name="size" maxlength="500" placeholder="e.g. image count, sequence duration, pixels"></div>
+            <div class="field full"><label for="annotations">Distress types and annotations <span class="optional">optional</span></label><textarea id="annotations" name="annotations" rows="3" maxlength="1600" placeholder="Cracks, potholes, rutting; bounding boxes, masks, depth, severity…"></textarea></div>
+            <div class="field full"><label for="tasks">Supported tasks <span class="optional">optional</span></label><input id="tasks" name="tasks" maxlength="500" placeholder="Detection, segmentation, depth estimation, roughness…"></div>
+            <div class="field full"><label for="notes">Evidence, limitations or correction details <span class="optional">optional</span></label><textarea id="notes" name="notes" rows="4" maxlength="2400" placeholder="For corrections, include the Atlas record ID. Describe scale calibration, synchronization, road context, access restrictions or information that is not yet verified."></textarea></div>
+          </div>
+        </fieldset>
+        <div class="trap" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+        <div class="consent-row"><input id="consent" name="consent" type="checkbox" required><label for="consent">I agree to send my name, email and these metadata to the Atlas review team for evaluation and a follow-up. I understand that submitted dataset information may be published after review. <span aria-hidden="true">*</span></label></div>
+        <div class="form-actions"><button id="submit-button" class="button primary" type="submit"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 16v5h14v-5"/></svg><span>Prepare Excel &amp; email</span></button><button id="export-button" class="button secondary" type="button">Download Excel only</button></div>
+        <p class="action-help" id="action-help">Preparing a file does not send a submission. The next step will show the addressed email and attachment instructions.</p>
+        <section class="result-panel" id="submission-result" aria-live="polite" tabindex="-1" hidden></section>
+      </form>
+    </div>
+    <aside class="review-aside" aria-label="Submission guidance">
+      <h2>A useful contribution starts with evidence.</h2><p>One dataset per submission keeps the review traceable. A source can be valuable even when some metadata are unknown.</p>
+      <ol class="review-steps"><li><strong>Describe the resource</strong><span>Include its original source, collection setup and reuse terms.</span></li><li><strong>Share with the review team</strong><span>Your metadata are packaged into an Excel record for review.</span></li><li><strong>Hear back after review</strong><span>We check the source and confirm any inclusion or clarification by email.</span></li></ol>
+      <a class="guide-link" href="schema.html">Read the metadata guide <span aria-hidden="true">→</span></a>
+      <div class="aside-detail"><h3>What belongs in the Atlas?</h3><p>Pavement imagery, road distress labels, surface geometry, texture, roughness and related sensing datasets. Include acquisition evidence for AV or vehicle suitability claims.</p></div>
+      <div class="aside-detail"><h3>Contact and privacy</h3><p>The review recipient is <a href="mailto:tianzhi.he@ami-lab.com">tianzhi.he@ami-lab.com</a>. Name and email are for curator correspondence, not public catalog fields. Please submit links and metadata, not private data or large files.</p></div>
+    </aside>
+  </div>
+</main>
+<footer class="site-footer"><span>PaveData Atlas · v1.3</span><a href="schema.html">Metadata guide</a><a href="index.html">Return to the Atlas</a></footer>
+</body>
+</html>
+

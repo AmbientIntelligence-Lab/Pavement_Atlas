@@ -1,0 +1,11 @@
+node_modules/
+.impeccable/
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+!.env.example
+__pycache__/
+verification/test-*.xlsx
+_site/

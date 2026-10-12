@@ -2,7 +2,7 @@
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AV model & sensor explorer · PaveData Atlas</title><style>/*STYLE*/</style></head>
 <body>
-<header class="viewer-header"><a href="index.html#av-models" target="_top">PaveData Atlas 1.2</a><h1>AV model & sensor explorer</h1><p>Four vehicles. One workspace for exploring their hardware.</p></header>
+<header class="viewer-header"><a href="index.html#av-models" target="_top">PaveData Atlas 1.3</a><h1>AV model & sensor explorer</h1><p>Explore six vehicle types, their sensing hardware, and related research datasets.</p></header>
 <main class="explorer">
  <div class="fleet-tabs" role="group" aria-label="Vehicle model" id="fleet-tabs"></div>
  <div class="model-intro"><div><h2 id="model-name"></h2><p id="model-role"></p></div><a id="drive-link" href="index.html#drive" target="_top">Drive this model →</a></div>
@@ -12,7 +12,7 @@
    <div id="viewport" tabindex="0" aria-label="3D vehicle. Drag to orbit, scroll to zoom. Arrow keys rotate; plus and minus zoom; R resets."><div id="markers"></div><p id="loading" role="status">Preparing the model…</p></div>
    <p class="stage-caption">Drag to orbit · scroll or pinch to zoom · select a marker or a sensor below</p>
    <div class="options">
-    <label><input id="ghost" type="checkbox"> See through</label><label><input id="coverage" type="checkbox" checked> Sensing sketch</label><label><input id="labels" type="checkbox" checked> Markers</label><label><input id="rotate" type="checkbox"> Auto-rotate</label>
+    <label><input id="ghost" type="checkbox"> See through</label><label><input id="coverage" type="checkbox" checked> Sensing sketch</label><label><input id="scan" type="checkbox"> Animate sketch</label><label><input id="labels" type="checkbox" checked> Markers</label><label><input id="rotate" type="checkbox"> Auto-rotate</label>
     <label id="optional-label" hidden><input id="optional" type="checkbox"><span id="optional-name">Optional equipment</span></label>
     <label id="doors-label" hidden><input id="doors" type="checkbox"> Open doors</label>
     <label class="separate">Separate sensors <input id="separate" type="range" min="0" max="100" value="0"><output id="separate-value">0%</output></label>
@@ -21,6 +21,7 @@
   <aside class="inspector" aria-label="Sensor inspector"><h3>Sensor inspector</h3><div id="detail" aria-live="polite"></div><div class="detail-actions"><button id="focus">Focus on sensor</button><button id="next">Next sensor</button></div><p class="caution">Sensing sketches show approximate direction only. They do not simulate calibrated range, occlusion, or detection performance.</p></aside>
  </div>
  <section class="inventory" aria-label="Sensor index"><div class="inventory-tools"><h3>Sensor index <span id="sensor-count"></span></h3><label for="search">Search sensors <input type="search" id="search" aria-label="Search sensors" placeholder="Name, location or model ID"></label><label for="family">Sensor family <select id="family" aria-label="Sensor family"><option value="all">All families</option></select></label></div><div id="sensor-list"></div></section>
+ <section class="vehicle-data" aria-labelledby="related-heading"><h3 id="related-heading">Related datasets</h3><div id="related-datasets"></div></section>
  <footer class="viewer-footer"><p id="model-note"></p><div><button id="export-model">Export model (.glb)</button><a id="source-notes" target="_blank" rel="noopener">Model evidence & source notes ↗</a><span id="export-status" role="status"></span></div></footer>
 </main>
 <script>/*APP*/</script>

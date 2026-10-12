@@ -1,21 +1,38 @@
 import assert from 'node:assert/strict';
-import {readFile,access} from 'node:fs/promises';
+import {readFile,access,readdir} from 'node:fs/promises';
+import {execFileSync} from 'node:child_process';
+import path from 'node:path';
 import vm from 'node:vm';
-const root=new URL('./',import.meta.url),html=await readFile(new URL('index.html',root),'utf8');
-const expected=['geo','modal','ann','acq','viewpoint','tasks','distress','av-models','drive','register','gallery','filters','readiness','submit'];
-assert.deepEqual([...html.matchAll(/<section class="section" id="([^"]+)"/g)].map(m=>m[1]),expected);
-const markup=html.split('<script')[0],ids=[...markup.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
-assert.equal(new Set(ids).size,ids.length,'Duplicate HTML IDs');
-for(const m of markup.matchAll(/href="#([^"]+)"/g))assert(ids.includes(m[1]),`Missing anchor ${m[1]}`);
-const records=JSON.parse(html.match(/const DATA = (\[[^\n]+\]);/)[1]);assert.equal(records.length,177);
-assert.equal(new Set(records.map(r=>r.id)).size,177);
-try{const original=await readFile(new URL('../Pavement_Atlas_website/index.html',root),'utf8');assert.deepEqual(records,JSON.parse(original.match(/const DATA = (\[[^\n]+\]);/)[1]),'Dataset inventory must remain unchanged');}catch(e){if(e.code!=='ENOENT')throw e;}
-const vehicles=html.match(/const VEHICLES=\{([\s\S]*?)\n\};/)[1];for(const name of ['Waymo I-PACE','Cybercab','Aurora truck','Rivian EDV'])assert(vehicles.includes(name));
-assert(html.includes('model=AtlasFleet.createFleetModel(kind)'));assert(!html.includes("if(kind==='sedan')"));
-for(const match of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g))new vm.Script(match[1]);
-for(const file of ['assets/fleet-runtime.js','src/atlas-integration.js'])new vm.Script(await readFile(new URL(file,root),'utf8'));
-const av=await readFile(new URL('av-model-simulation.html',root),'utf8');assert(!av.includes('/*APP*/'));assert(!/<script[^>]+src=/.test(av),'Standalone viewer must bundle its runtime');
-for(const match of av.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(match[1]);
-const assets=new Set([...html.matchAll(/(?:src|href)=["']((?:assets|src|data)\/[^"']+)["']/g)].map(m=>m[1]));
-for(const asset of assets)await access(new URL(asset,root));
-console.log(`PASS: ordered modules, navigation targets, unique IDs, 177 unchanged records, four fleet vehicles, script syntax, standalone bundle and ${assets.size} local assets.`);
+const root=import.meta.dirname;
+const read=file=>readFile(path.join(root,file),'utf8');
+const pages=['index.html','dataset.html','av-model-simulation.html','driving-simulation.html','submit.html','schema.html','guide.html'];
+const html=await read('index.html');
+assert.deepEqual([...html.matchAll(/<section class="section" id="([^"]+)"/g)].map(m=>m[1]),['geo','modal','ann','acq','viewpoint','tasks','distress','av-models','drive','register','gallery','filters','readiness','submit'],'Preserved Atlas section order');
+let links=0,scripts=0;
+for(const page of pages){
+ const source=await read(page),markup=source.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,'');
+ const ids=[...markup.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+ assert.equal(new Set(ids).size,ids.length,`${page}: unique HTML IDs`);
+ assert(!source.includes('/*APP*/')&&!source.includes('/*STYLE*/'),`${page}: built placeholders`);
+ for(const m of markup.matchAll(/(?:src|href)=["']([^"']+)["']/g)){
+  const target=m[1];if(/^(?:https?:|mailto:|data:|blob:)/.test(target))continue;
+  if(target.startsWith('#')){assert(ids.includes(target.slice(1)),`${page}: missing anchor ${target}`);continue;}
+  const file=decodeURIComponent(target.split(/[?#]/)[0]);if(!file)continue;
+  await access(path.resolve(root,path.dirname(page),file));links++;
+ }
+ for(const m of source.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)){
+  if(/type="application\/ld\+json"/.test(m[1])){JSON.parse(m[2]);continue;}
+  if(m[2].trim()){new vm.Script(m[2],{filename:page});scripts++;}
+ }
+}
+async function checkJs(dir){for(const entry of await readdir(path.join(root,dir),{withFileTypes:true})){
+ const file=path.join(dir,entry.name);if(entry.isDirectory())await checkJs(file);
+ else if(/\.(?:js|mjs)$/.test(file)){execFileSync(process.execPath,['--check',path.join(root,file)],{stdio:'pipe'});scripts++;}
+}}
+await checkJs('src');
+for(const file of ['data/catalog.js','data/reference.js'])new vm.Script(await read(file),{filename:file});
+for(const file of ['docs/screenshots/catalog.jpg','docs/screenshots/vehicle-lab.jpg','docs/screenshots/driving.jpg','docs/screenshots/submissions.jpg'])await access(path.join(root,file));
+await import('./scripts/verify-data.mjs');
+await import('./scripts/verify-filters.mjs');
+await import('./integrations/test-submissions.mjs');
+console.log(`PASS: ${pages.length} pages, section order, unique IDs, anchors, ${links} local links/assets, ${scripts} scripts and documentation screenshots.`);

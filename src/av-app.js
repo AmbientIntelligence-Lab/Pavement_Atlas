@@ -3,6 +3,8 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
 import {FLEET,createFleetModel,disposeModel} from './fleet.js';
+import {makeTestPad,setSceneLighting} from './scene-environment.js';
+import {showVehicleDatasets} from './vehicle-datasets.js';
 
 const $=id=>document.getElementById(id), esc=v=>String(v||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const params=new URLSearchParams(location.search), embedded=params.has('embed'), reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -16,12 +18,11 @@ try{
  $('viewport').prepend(renderer.domElement);
  controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.autoRotateSpeed=.7;controls.maxPolarAngle=Math.PI*.49;controls.minDistance=.4;controls.maxDistance=70;
  const environment=new RoomEnvironment();const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(environment,.04).texture;environment.dispose();pm.dispose();
- scene.add(new THREE.HemisphereLight(0xffffff,0x9aa4b0,2.5));const light=new THREE.DirectionalLight(0xffffff,3);light.position.set(5,10,6);scene.add(light);
- const floor=new THREE.Mesh(new THREE.CircleGeometry(40,64),new THREE.MeshStandardMaterial({color:0xe8ecf0,roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=-.04;scene.add(floor);
+ setSceneLighting(scene,renderer);makeTestPad(scene);
  $('loading').hidden=true;
-}catch(error){$('loading').textContent='3D needs WebGL 2 and browser hardware acceleration. You can still browse every sensor in the index below.';['focus','ghost','coverage','labels','rotate','separate','doors','optional'].forEach(id=>$(id).disabled=true);document.querySelectorAll('[data-view]').forEach(b=>b.disabled=true);}
+}catch(error){$('loading').textContent='3D needs WebGL 2 and browser hardware acceleration. You can still browse every sensor in the index below.';['focus','ghost','coverage','scan','labels','rotate','separate','doors','optional'].forEach(id=>$(id).disabled=true);document.querySelectorAll('[data-view]').forEach(b=>b.disabled=true);}
 
-function clearGraphics(group){while(group.children.length){const obj=group.children[0];group.remove(obj);obj.geometry?.dispose();obj.material?.dispose();}}
+function clearGraphics(group){while(group.children.length){const obj=group.children[0];group.remove(obj);obj.traverse(child=>{child.geometry?.dispose();child.material?.dispose();});}group.userData.sweep=null;}
 function activeSensors(){return model.sensors.filter(s=>!s.optional||$('optional').checked);}
 function filtered(){const q=$('search').value.trim().toLowerCase(),f=$('family').value;return activeSensors().filter(s=>(f==='all'||s.type===f)&&(!q||`${s.id} ${s.name} ${s.location} ${s.type}`.toLowerCase().includes(q)));}
 function home(view='home'){
@@ -63,22 +64,27 @@ function updateGraphics(){
  if(!$('coverage').checked||!selected||!renderer)return;
  const s=selected,type=s.type,color=model.types[type]?.color||'#0071e3',origin=s.group.position.clone();
  if(['support','fleet','sensing'].includes(type))return;
- if(type==='audio'||(type==='lidar'&&model.key==='waymo'&&s.id==='L01')){
+ if(type==='audio'||(type==='lidar'&&s.id==='L01')){
   for(const radius of [.6,1.1,1.6]){const points=Array.from({length:65},(_,i)=>new THREE.Vector3(origin.x+Math.cos(i*Math.PI/32)*radius,origin.y-.2*radius,origin.z+Math.sin(i*Math.PI/32)*radius));coverage.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),new THREE.LineBasicMaterial({color,transparent:true,opacity:.6})));}
+  if(type==='lidar'){
+   const sweep=new THREE.Group();sweep.position.copy(origin);coverage.add(sweep);const points=[new THREE.Vector3(),new THREE.Vector3(3,-origin.y+.035,0)];sweep.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),new THREE.LineBasicMaterial({color,transparent:true,opacity:.7})));const spot=new THREE.Mesh(new THREE.SphereGeometry(.035,8,6),new THREE.MeshBasicMaterial({color}));spot.position.copy(points[1]);sweep.add(spot);coverage.userData.sweep=sweep;
+  }
  }else{
   const length=model.spec.length*.43,dir=s.dir.clone().normalize(),end=origin.clone().addScaledVector(dir,length);const right=new THREE.Vector3().crossVectors(dir,new THREE.Vector3(0,1,0)).normalize();if(right.length()<.1)right.set(1,0,0);const up=new THREE.Vector3().crossVectors(right,dir).normalize();
   const corners=[[-1,-1],[1,-1],[1,1],[-1,1]].map(([x,y])=>end.clone().addScaledVector(right,x*length*.38).addScaledVector(up,y*length*.23));const vertices=[];
   for(let i=0;i<4;i++){vertices.push(...origin.toArray(),...corners[i].toArray(),...corners[(i+1)%4].toArray());coverage.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([origin,corners[i],corners[(i+1)%4]]),new THREE.LineBasicMaterial({color,transparent:true,opacity:.55})));}
   const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));geometry.computeVertexNormals();coverage.add(new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color,transparent:true,opacity:.09,side:THREE.DoubleSide,depthWrite:false})));
  }
+ coverage.traverse(o=>{if(o.material?.transparent)o.material.userData.sketchOpacity=o.material.opacity;});
 }
 function loadModel(key,notify=true){
  if(!FLEET[key])return;
  if(model){scene.remove(model.vehicle);disposeModel(model);}
  model=createFleetModel(key);scene.add(model.vehicle);selected=null;
  $('model-name').textContent=model.spec.name;$('model-role').textContent=model.spec.role;$('model-note').textContent=model.spec.note+' All models are educational reconstructions with approximate geometry.';
- $('source-notes').href=`src/models/${{waymo:'waymo-ipace',cybercab:'cybercab',aurora:'aurora-truck',rivian:'rivian-edv'}[key]}/SOURCE-README.md`;
- $('drive-link').href=`index.html?vehicle=${key}#drive`;
+ $('source-notes').href=`src/models/${{waymo:'waymo-ipace',cybercab:'cybercab',aurora:'aurora-truck',rivian:'rivian-edv',lab:'research-vehicles',adas:'research-vehicles'}[key]}/SOURCE-README.md`;
+ $('drive-link').href=`driving-simulation.html?vehicle=${key}`;
+ showVehicleDatasets($('related-datasets'),key);
  for(const id of ['ghost','optional','doors','rotate'])$(id).checked=false;$('separate').value=0;$('separate-value').textContent='0%';$('search').value='';
  $('optional-label').hidden=!['aurora','rivian'].includes(key);$('optional-name').textContent=key==='aurora'?'Trailer':'Fleet additions';$('doors-label').hidden=key!=='cybercab';
  $('family').innerHTML='<option value="all">All families</option>'+Object.entries(model.types).map(([k,v])=>`<option value="${k}">${esc(v.label)}</option>`).join('');
@@ -114,5 +120,5 @@ if(renderer){
 window.addEventListener('message',e=>{if(e.source!==parent||e.data?.type!=='atlas-vehicle')return;if(e.origin!==location.origin&&e.origin!=='null')return;if(e.data.vehicle!==model?.key)loadModel(e.data.vehicle,false);});
 loadModel(FLEET[params.get('vehicle')]?params.get('vehicle'):'waymo',false);
 if(embedded)new ResizeObserver(()=>parent.postMessage({type:'atlas-viewer-height',height:Math.ceil(document.documentElement.getBoundingClientRect().height)},location.origin==='null'?'*':location.origin)).observe(document.body);
-function frame(time){requestAnimationFrame(frame);if(!renderer||!visible||document.hidden)return;const dt=Math.min((time-last)/1000||.016,.1);last=time;if(reduced)controls.autoRotate=false;controls.update(dt);scene.updateMatrixWorld();const rect=$('viewport').getBoundingClientRect(),occupied=[];const shown=new Set(filtered());for(const s of [selected,...model.sensors.filter(s=>s!==selected)].filter(Boolean)){const p=s.group.getWorldPosition(new THREE.Vector3()).project(camera),x=(p.x*.5+.5)*rect.width,y=(-p.y*.5+.5)*rect.height;const show=shown.has(s)&&p.z>-1&&p.z<1&&x>14&&x<rect.width-14&&y>12&&y<rect.height-12&&!occupied.some(([a,b])=>Math.abs(x-a)<32&&Math.abs(y-b)<23);s.marker.hidden=!show;s.marker.setAttribute('aria-pressed',s===selected);if(show){occupied.push([x,y]);s.marker.style.transform=`translate(${x-13}px,${y-10}px)`;}}renderer.render(scene,camera);}
+function frame(time){requestAnimationFrame(frame);if(!renderer||!visible||document.hidden)return;const dt=Math.min((time-last)/1000||.016,.1);last=time;if(reduced)controls.autoRotate=false;controls.update(dt);if($('scan').checked&&!reduced){coverage.traverse(o=>{if(o.material?.userData.sketchOpacity)o.material.opacity=o.material.userData.sketchOpacity*(.65+.35*Math.sin(time*.003));});if(coverage.userData.sweep)coverage.userData.sweep.rotation.y=time*.0013;}scene.updateMatrixWorld();const rect=$('viewport').getBoundingClientRect(),occupied=[];const shown=new Set(filtered());for(const s of [selected,...model.sensors.filter(s=>s!==selected)].filter(Boolean)){const p=s.group.getWorldPosition(new THREE.Vector3()).project(camera),x=(p.x*.5+.5)*rect.width,y=(-p.y*.5+.5)*rect.height;const show=shown.has(s)&&p.z>-1&&p.z<1&&x>14&&x<rect.width-14&&y>12&&y<rect.height-12&&!occupied.some(([a,b])=>Math.abs(x-a)<32&&Math.abs(y-b)<23);s.marker.hidden=!show;s.marker.setAttribute('aria-pressed',s===selected);if(show){occupied.push([x,y]);s.marker.style.transform=`translate(${x-13}px,${y-10}px)`;}}renderer.render(scene,camera);}
 requestAnimationFrame(frame);

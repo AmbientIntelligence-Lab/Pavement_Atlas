@@ -88,3 +88,17 @@ Downscaled previews of figures and sample images published by the dataset author
 The active driving simulation and combined sensor explorer use Three.js 0.180.0 (MIT). The license is included in licenses/THREE-LICENSE.txt and retained in the JavaScript bundles. The original r128 asset is retained from the supplied Atlas but is no longer loaded.
 
 Vehicle geometry and sensor descriptions are copied from the supplied waymo-ipace, cybercab, aurora-truck and rivian-edv projects. Their original evidence, scope and source credits are preserved in src/models/*/SOURCE-README.md and sensor metadata. The shared viewer renders their procedural source geometry; it does not substitute generic vehicle meshes. Vehicle names and marks identify the subjects; these remain independent educational reconstructions, with no manufacturer affiliation implied. The new viewer uses system fonts and does not redistribute the Cybercab project's Manrope font.
+
+## Version 1.3 additions
+
+The active vehicle lab and driving workspace use **Three.js 0.180.0**, under the MIT license retained in `licenses/THREE-LICENSE.txt` and the generated bundles. The older r128 credit above documents the inherited asset; it is not the active rendering version.
+
+The **Research survey vehicle** and **Assisted-driving vehicle** are original procedural educational models created for this Atlas update. Their cameras, LiDAR, radar, GNSS/inertial equipment, rear profilers and placement describe generic configurations. They are not manufacturer CAD assets, verified hardware inventories, or replicas of the vehicles that captured the linked datasets. See [research vehicle notes](src/models/research-vehicles/SOURCE-README.md).
+
+The new urban road geometry, buildings, traffic-signal arrangements, road-surface examples, surrounding traffic, environment effects, sensing sketches and generated response plots are procedural educational assets. They do not reproduce a surveyed site or validated simulator. Their scope is documented in [simulation notes](src/models/SIMULATION-NOTES.md). Original dataset samples and distress reference photographs retain the individual credits and licenses above.
+
+Catalog metadata and selection rules were imported from the user-supplied **Compared_All_Platforms_TH_v4.0.xlsx** and **Compared_All_Platforms_TH_v4.0.docx**. Source hashes, source-row lineage, merged aliases and evidence limitations are recorded in [data/provenance.json](data/provenance.json) and [data/DATA_NOTES.md](data/DATA_NOTES.md). Including a link or preview does not transfer a dataset's reuse rights to the Atlas.
+
+[OpenConstruction's dataset directory](https://www.openconstruction.org/dataset.html), [detail-page example](https://www.openconstruction.org/datasets/detail.html?id=camhighways) and [schema reference](https://www.openconstruction.org/schema.html) informed the emphasis on source provenance, access information and structured metadata. The Atlas pages, layout and interactions are independently implemented. The submission schema also refers to [Schema.org Dataset](https://schema.org/Dataset); this does not imply full equivalence between all Atlas fields and Schema.org properties.
+
+The contribution XLSX writer, form, validation flow and Google Apps Script receiver were written for this update. The receiver uses the documented Google Apps Script and Drive APIs; no third-party email credentials or libraries are distributed in the browser. The site uses system fonts and authored SVG interface icons.

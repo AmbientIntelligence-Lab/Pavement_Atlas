@@ -1,0 +1,476 @@
+{
+  "schemaVersion": "1.3",
+  "reviewDate": "2026-10-12",
+  "basis": "The supplied v4 workbook Vehicle_Coverage and All_Datasets sheets, with selected public primary documentation checked on October 12, 2026. No payloads were downloaded and no vehicle operating mode was independently verified.",
+  "vehicles": [
+    {
+      "id": "waymo",
+      "name": "Waymo research and robotaxi fleet",
+      "type": "Autonomous passenger vehicle",
+      "associationNote": "These are official Waymo datasets. The exact collection vehicle and sensor generation must be checked in each release; the illustrated I-PACE does not identify every recording vehicle.",
+      "datasets": [
+        {
+          "id": "DS-231",
+          "relationship": "Official Waymo release",
+          "summary": "Camera and LiDAR perception data for studying road scenes, objects and sensor fusion.",
+          "limitations": "Road and object labels do not establish crack, pothole or measured pavement-severity ground truth.",
+          "name": "Waymo Open Dataset - Perception",
+          "url": "https://waymo.com/open/download/",
+          "catalogUrl": "dataset.html?id=DS-231",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames",
+            "LiDAR / point cloud"
+          ],
+          "labels": "No crack/pothole/roughness/wetness labels documented. Road/lane semantic classes and mapped speed bumps available",
+          "access": "Account / terms",
+          "terms": "Waymo Dataset License; noncommercial research restrictions; not the code's Apache license",
+          "profile": "Labeled-16",
+          "sourceRow": 236
+        },
+        {
+          "id": "DS-230",
+          "relationship": "Official Waymo release",
+          "summary": "Camera sequences for end-to-end driving research and trajectory prediction.",
+          "limitations": "A driving benchmark is not a pavement-distress benchmark. Check release terms, target definitions and supported subsets.",
+          "name": "Waymo Open Dataset - End-to-End Driving",
+          "url": "https://waymo.com/open/download/",
+          "catalogUrl": "dataset.html?id=DS-230",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames"
+          ],
+          "labels": "No pavement distress labels; construction/debris scenario clusters are related context",
+          "access": "Account / terms",
+          "terms": "Waymo Dataset License; noncommercial research restrictions",
+          "profile": "Labeled-16",
+          "sourceRow": 235
+        },
+        {
+          "id": "DS-183",
+          "relationship": "Relevant road-condition alternative; independent of Waymo",
+          "summary": "ZOD adds road-condition annotations and camera–LiDAR pairs for condition-aware perception research.",
+          "limitations": "Zenseact collection, not Waymo footage. Road-condition metadata must not be treated as calibrated distress severity.",
+          "name": "Zenseact Open Dataset (ZOD: Frames, Sequences, Drives)",
+          "url": "https://zod.zenseact.com/frames/",
+          "catalogUrl": "dataset.html?id=DS-183",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames"
+          ],
+          "labels": "Binary wetness and snow_coverage labels for Frames; ego-road and debris masks; no cracks/potholes/PCI",
+          "access": "Public links",
+          "terms": "CC BY-SA 4.0",
+          "profile": "Labeled-16",
+          "sourceRow": 188
+        }
+      ],
+      "sources": [
+        {
+          "label": "Waymo Open Dataset",
+          "url": "https://waymo.com/open/"
+        },
+        {
+          "label": "ZOD Frames documentation",
+          "url": "https://zod.zenseact.com/frames/"
+        }
+      ]
+    },
+    {
+      "id": "cybercab",
+      "name": "Tesla Cybercab concept",
+      "type": "Camera-led autonomous passenger vehicle",
+      "associationNote": "No qualifying public Cybercab research release is identified in the supplied inventory. The links below are third-party Tesla-owner recordings from NATIX, not Cybercab data or a Tesla Inc. dataset.",
+      "datasets": [
+        {
+          "id": "DS-178",
+          "relationship": "Third-party Tesla-owner footage; not Cybercab",
+          "summary": "A small multi-camera event collection includes VLM descriptions of road-surface deterioration.",
+          "limitations": "Manually validate event descriptions. The card states gated access and NATIX Data RAIL-NC terms; automated-driving engagement is not established.",
+          "name": "NATIX Edge Case Driving Dataset",
+          "url": "https://huggingface.co/datasets/natix-network-org/natix-edge-case-driving-dataset",
+          "catalogUrl": "dataset.html?id=DS-178",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames"
+          ],
+          "labels": "Road surface deterioration among event categories; VLM-generated descriptions, not engineered distress/severity ground truth",
+          "access": "Account / terms",
+          "terms": "NATIX Data RAIL-NC; noncommercial; no redistribution; limited term",
+          "profile": "Labeled-16",
+          "sourceRow": 183
+        },
+        {
+          "id": "DS-217",
+          "relationship": "Third-party Tesla-owner footage; not Cybercab",
+          "summary": "Multi-camera driving sequences with GNSS and trip metadata for camera-based perception studies.",
+          "limitations": "Crowdsourced owner recordings with no established Cybercab connection or engineered pavement distress targets.",
+          "name": "NATIX Multi-Camera Driving Dataset",
+          "url": "https://huggingface.co/datasets/natix-network-org/natix-multi-camera-driving-dataset",
+          "catalogUrl": "dataset.html?id=DS-217",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames"
+          ],
+          "labels": "None documented; weather and OSM road-type metadata are not pavement condition",
+          "access": "Account / terms",
+          "terms": "NATIX Data RAIL-NC; noncommercial; no redistribution; limited term",
+          "profile": "Unlabeled-13",
+          "sourceRow": 222
+        },
+        {
+          "id": "DS-218",
+          "relationship": "Third-party Tesla-owner footage; not Cybercab",
+          "summary": "Safety-critical driving events for investigating difficult road-scene interactions.",
+          "limitations": "Event targets serve driving research; they do not supply a validated pavement distress taxonomy.",
+          "name": "NATIX Safety Critical Driving Events Dataset",
+          "url": "https://huggingface.co/datasets/natix-network-org/natix-safety-critical-driving-events-dataset",
+          "catalogUrl": "dataset.html?id=DS-218",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames"
+          ],
+          "labels": "None documented; harsh braking/acceleration/turning are vehicle behavior events",
+          "access": "Account / terms",
+          "terms": "NATIX Data RAIL-NC; noncommercial; no redistribution; limited term",
+          "profile": "Labeled-16",
+          "sourceRow": 223
+        }
+      ],
+      "sources": [
+        {
+          "label": "NATIX Edge Case dataset card",
+          "url": "https://huggingface.co/datasets/natix-network-org/natix-edge-case-driving-dataset"
+        },
+        {
+          "label": "NATIX Multi-Camera dataset card",
+          "url": "https://huggingface.co/datasets/natix-network-org/natix-multi-camera-driving-dataset"
+        }
+      ]
+    },
+    {
+      "id": "aurora",
+      "name": "Aurora autonomous truck",
+      "type": "Autonomous heavy vehicle",
+      "associationNote": "The supplied search found no qualifying Aurora truck-camera release. Pit30M has an Aurora connection through historical Uber ATG collection; it must not be presented as Aurora truck footage. MAN and Torc are independent trucking alternatives.",
+      "datasets": [
+        {
+          "id": "DS-204",
+          "relationship": "Aurora-linked historical research collection; not truck footage",
+          "summary": "Pit30M / Aurora Multi-Sensor data supports visual localization and multimodal mapping.",
+          "limitations": "Historical Uber ATG vehicle collection. No documented pavement distress/severity labels and no claim that the illustrated Aurora truck collected it.",
+          "name": "Aurora Multi-Sensor Dataset / Pit30M",
+          "url": "https://pit30m.github.io/",
+          "catalogUrl": "dataset.html?id=DS-204",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames",
+            "LiDAR / point cloud",
+            "Stereo / depth"
+          ],
+          "labels": "Weather metadata and semantic segmentation; no pavement distress/severity annotations documented",
+          "access": "Public links",
+          "terms": "CC BY-NC-SA 4.0; intended for noncommercial academic use",
+          "profile": "Labeled-16",
+          "sourceRow": 209
+        },
+        {
+          "id": "DS-216",
+          "relationship": "Independent truck dataset from MAN",
+          "summary": "TruckScenes provides a truck-specific multimodal perception reference.",
+          "limitations": "MAN development-truck recordings, not Aurora data. Weather and object annotations do not establish distress labels.",
+          "name": "MAN TruckScenes",
+          "url": "https://www.man.eu/truckscenes",
+          "catalogUrl": "dataset.html?id=DS-216",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames",
+            "LiDAR / point cloud",
+            "Radar"
+          ],
+          "labels": "34 scene tags include weather/lighting/area; no pavement distress or severity labels documented",
+          "access": "Public links",
+          "terms": "CC BY-NC-SA 4.0",
+          "profile": "Labeled-16",
+          "sourceRow": 221
+        },
+        {
+          "id": "DS-228",
+          "relationship": "Independent truck dataset from Torc Robotics",
+          "summary": "TruckDrive targets long-range highway perception from an autonomous trucking program.",
+          "limitations": "Resolve the current release scope before reuse: the project describes multimodal sensing, while the linked license says raw sensor streams are not part of the licensed material. Access was not tested.",
+          "name": "TruckDrive",
+          "url": "https://huggingface.co/datasets/Torc-Robotics/TruckDrive",
+          "catalogUrl": "dataset.html?id=DS-228",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames",
+            "LiDAR / point cloud",
+            "Radar"
+          ],
+          "labels": "No pavement-condition labels documented; object/scene annotations and depth supervision",
+          "access": "Public links",
+          "terms": "Torc custom noncommercial/commercial license files; check applicable terms",
+          "profile": "Labeled-16",
+          "sourceRow": 233
+        }
+      ],
+      "sources": [
+        {
+          "label": "Pit30M development kit",
+          "url": "https://github.com/pit30m/pit30m"
+        },
+        {
+          "label": "MAN TruckScenes",
+          "url": "https://www.man.eu/truckscenes"
+        },
+        {
+          "label": "TruckDrive project",
+          "url": "https://torc-ai.github.io/TruckDrive/"
+        },
+        {
+          "label": "TruckDrive release and terms",
+          "url": "https://huggingface.co/datasets/Torc-Robotics/TruckDrive"
+        }
+      ]
+    },
+    {
+      "id": "rivian",
+      "name": "Rivian electric delivery vehicle",
+      "type": "Commercial delivery vehicle",
+      "associationNote": "No public Rivian EDV footage dataset is identified by the supplied search dated October 11, 2026. These independent datasets support related urban perception studies; none is claimed to have been collected by a Rivian EDV.",
+      "datasets": [
+        {
+          "id": "DS-221",
+          "relationship": "Independent urban-perception reference",
+          "summary": "nuScenes offers multimodal urban road scenes for object perception and sensor fusion.",
+          "limitations": "No Rivian affiliation is asserted. The capture platform, sensor arrangement and pavement targets differ from a delivery vehicle deployment.",
+          "name": "nuScenes",
+          "url": "https://www.nuscenes.org/nuscenes",
+          "catalogUrl": "dataset.html?id=DS-221",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames",
+            "LiDAR / point cloud",
+            "Radar",
+            "GPS / IMU telemetry"
+          ],
+          "labels": "No pavement distress or surface-state labels documented; object boxes and road/drivable-area semantics",
+          "access": "Account / terms",
+          "terms": "Noncommercial dataset terms; commercial licensing by request",
+          "profile": "Labeled-16",
+          "sourceRow": 226
+        },
+        {
+          "id": "DS-197",
+          "relationship": "Independent automotive-perception reference",
+          "summary": "Audi A2D2 includes camera imagery, point clouds, segmentation and automotive-bus data.",
+          "limitations": "Audi collection, not EDV footage. Examine license and target definitions for the intended study.",
+          "name": "A2D2 (Audi Autonomous Driving Dataset)",
+          "url": "https://a2d2-dataset.github.io/",
+          "catalogUrl": "dataset.html?id=DS-197",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames",
+            "LiDAR / point cloud"
+          ],
+          "labels": "No pavement distress/surface-state labels documented; road and other semantic classes",
+          "access": "Public links",
+          "terms": "CC BY-ND 4.0",
+          "profile": "Labeled-16",
+          "sourceRow": 202
+        },
+        {
+          "id": "DS-183",
+          "relationship": "Independent condition-aware perception reference",
+          "summary": "ZOD provides camera–LiDAR data with road-condition annotations across varied European settings.",
+          "limitations": "Zenseact collection, not Rivian data. The dataset's road conditions are not measured pavement severity.",
+          "name": "Zenseact Open Dataset (ZOD: Frames, Sequences, Drives)",
+          "url": "https://zod.zenseact.com/frames/",
+          "catalogUrl": "dataset.html?id=DS-183",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames"
+          ],
+          "labels": "Binary wetness and snow_coverage labels for Frames; ego-road and debris masks; no cracks/potholes/PCI",
+          "access": "Public links",
+          "terms": "CC BY-SA 4.0",
+          "profile": "Labeled-16",
+          "sourceRow": 188
+        }
+      ],
+      "sources": [
+        {
+          "label": "nuScenes",
+          "url": "https://www.nuscenes.org/nuscenes"
+        },
+        {
+          "label": "A2D2 official dataset page",
+          "url": "https://a2d2-dataset.github.io/"
+        },
+        {
+          "label": "ZOD Frames",
+          "url": "https://zod.zenseact.com/frames/"
+        }
+      ]
+    },
+    {
+      "id": "lab",
+      "name": "Instrumented laboratory survey vehicle",
+      "type": "Research vehicle with configurable sensors",
+      "associationNote": "The vehicle is a generic educational research rig. These independently collected datasets illustrate camera, inertial and positioning workflows; no dataset was produced by the illustrated rig.",
+      "datasets": [
+        {
+          "id": "DS-160",
+          "relationship": "Relevant pavement-sensing research collection",
+          "summary": "PVS pairs vehicular camera, GPS and inertial measurements for road-surface and roughness research.",
+          "limitations": "Roughness categories are not calibrated IRI. Vehicle and driver factors are paired; inspect the study design before generalizing.",
+          "name": "PVS - Passive Vehicular Sensors Datasets",
+          "url": "https://github.com/jefmenegazzo/Intelligent-Vehicle-Perception-Based-on-Inertial-Sensing-and-Artificial-Intelligence",
+          "catalogUrl": "dataset.html?id=DS-160",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames",
+            "GPS / IMU telemetry"
+          ],
+          "labels": "Good/regular/bad roughness by vehicle side; asphalt/cobblestone/dirt; paved/unpaved; speed-bump classes.",
+          "access": "Account / terms",
+          "terms": "CC BY-NC-ND 4.0 per author repository",
+          "profile": "Labeled-16",
+          "sourceRow": 165
+        },
+        {
+          "id": "DS-225",
+          "relationship": "Relevant instrumented research-vehicle collection",
+          "summary": "Oxford RobotCar provides repeated route observations for studying mapping under seasonal and traffic changes.",
+          "limitations": "An autonomy and localization resource, without a documented pavement distress/severity annotation layer in this inventory.",
+          "name": "Oxford RobotCar / Radar RobotCar",
+          "url": "https://robotcar-dataset.robots.ox.ac.uk/",
+          "catalogUrl": "dataset.html?id=DS-225",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames",
+            "LiDAR / point cloud",
+            "Radar"
+          ],
+          "labels": "No pavement distress/surface-state labels documented; repeated seasons, weather and roadworks",
+          "access": "Request access",
+          "terms": "CC BY-NC-SA 4.0 plus access terms; academic noncommercial robotics research",
+          "profile": "Labeled-16",
+          "sourceRow": 230
+        },
+        {
+          "id": "DS-214",
+          "relationship": "Relevant instrumented research-vehicle collection",
+          "summary": "KITTI Raw connects driving imagery with synchronized sensing for perception and mapping.",
+          "limitations": "Use the raw-data and calibration documentation. Public object benchmarks do not establish road-distress labels. The official page could not be freshly fetched during this website update.",
+          "name": "KITTI Raw (with KITTI benchmark family)",
+          "url": "https://www.cvlibs.net/datasets/kitti/raw_data.php",
+          "catalogUrl": "dataset.html?id=DS-214",
+          "modalities": [
+            "Video / frames",
+            "LiDAR / point cloud",
+            "GPS / IMU telemetry",
+            "Stereo / depth"
+          ],
+          "labels": "No pavement distress/surface-state labels documented; raw object tracklets and separate road benchmark masks",
+          "access": "Account / terms",
+          "terms": "CC BY-NC-SA 3.0 dataset terms",
+          "profile": "Labeled-16",
+          "sourceRow": 219
+        }
+      ],
+      "sources": [
+        {
+          "label": "PVS research repository",
+          "url": "https://github.com/jefmenegazzo/Intelligent-Vehicle-Perception-Based-on-Inertial-Sensing-and-Artificial-Intelligence"
+        },
+        {
+          "label": "Oxford RobotCar",
+          "url": "https://robotcar-dataset.robots.ox.ac.uk/"
+        },
+        {
+          "label": "KITTI Raw",
+          "url": "https://www.cvlibs.net/datasets/kitti/raw_data.php"
+        }
+      ]
+    },
+    {
+      "id": "adas",
+      "name": "Passenger car with driver assistance",
+      "type": "Human-supervised assisted-driving research",
+      "associationNote": "These datasets are relevant to passenger-car perception and driver-assistance research. The illustration is generic, and dataset inclusion does not establish that assistance was active during every recorded segment.",
+      "datasets": [
+        {
+          "id": "DS-210",
+          "relationship": "Passenger-car sensor research reference",
+          "summary": "comma2k19 combines road-facing video, GNSS, inertial and CAN signals from commuter driving.",
+          "limitations": "The inventory assigns the Unlabeled-13 documentation profile for unlabeled use. Pose estimates are available, but pavement-distress targets are not documented.",
+          "name": "comma2k19",
+          "url": "https://github.com/commaai/comma2k19",
+          "catalogUrl": "dataset.html?id=DS-210",
+          "modalities": [
+            "Video / frames",
+            "GPS / IMU telemetry"
+          ],
+          "labels": "No pavement distress/surface-state labels supplied",
+          "access": "Public links",
+          "terms": "Repository MIT; review downloaded data notices",
+          "profile": "Unlabeled-13",
+          "sourceRow": 215
+        },
+        {
+          "id": "DS-197",
+          "relationship": "Passenger-car multimodal perception reference",
+          "summary": "Audi A2D2 combines camera and LiDAR data with semantic annotations and automotive-bus information.",
+          "limitations": "Collection for AV research does not prove autonomous operation in each recording. Review image/label pairing and terms.",
+          "name": "A2D2 (Audi Autonomous Driving Dataset)",
+          "url": "https://a2d2-dataset.github.io/",
+          "catalogUrl": "dataset.html?id=DS-197",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames",
+            "LiDAR / point cloud"
+          ],
+          "labels": "No pavement distress/surface-state labels documented; road and other semantic classes",
+          "access": "Public links",
+          "terms": "CC BY-ND 4.0",
+          "profile": "Labeled-16",
+          "sourceRow": 202
+        },
+        {
+          "id": "DS-183",
+          "relationship": "Road-condition and automotive-perception reference",
+          "summary": "ZOD supplies road-condition, object and lane annotations for varied driving conditions.",
+          "limitations": "Road condition includes a different target space from pavement engineering distress or severity. Declare the intended task before comparing.",
+          "name": "Zenseact Open Dataset (ZOD: Frames, Sequences, Drives)",
+          "url": "https://zod.zenseact.com/frames/",
+          "catalogUrl": "dataset.html?id=DS-183",
+          "modalities": [
+            "Images (color unspecified)",
+            "Video / frames"
+          ],
+          "labels": "Binary wetness and snow_coverage labels for Frames; ego-road and debris masks; no cracks/potholes/PCI",
+          "access": "Public links",
+          "terms": "CC BY-SA 4.0",
+          "profile": "Labeled-16",
+          "sourceRow": 188
+        }
+      ],
+      "sources": [
+        {
+          "label": "comma2k19 repository",
+          "url": "https://github.com/commaai/comma2k19"
+        },
+        {
+          "label": "A2D2 official dataset page",
+          "url": "https://a2d2-dataset.github.io/"
+        },
+        {
+          "label": "ZOD Frames",
+          "url": "https://zod.zenseact.com/frames/"
+        }
+      ]
+    }
+  ]
+}
