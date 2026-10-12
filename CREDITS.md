@@ -82,3 +82,9 @@ Downscaled previews of figures and sample images published by the dataset author
 | DS-029 | https://github.com/FuturePave/PaveSeg-Dataset |
 | DS-034 | https://github.com/sekilab/RoadDamageDetector |
 | DS-024 | https://github.com/neemajakisa/Pavement-Distress-Dataset |
+
+## Version 1.2 vehicle integration
+
+The active driving simulation and combined sensor explorer use Three.js 0.180.0 (MIT). The license is included in licenses/THREE-LICENSE.txt and retained in the JavaScript bundles. The original r128 asset is retained from the supplied Atlas but is no longer loaded.
+
+Vehicle geometry and sensor descriptions are copied from the supplied waymo-ipace, cybercab, aurora-truck and rivian-edv projects. Their original evidence, scope and source credits are preserved in src/models/*/SOURCE-README.md and sensor metadata. The shared viewer renders their procedural source geometry; it does not substitute generic vehicle meshes. Vehicle names and marks identify the subjects; these remain independent educational reconstructions, with no manufacturer affiliation implied. The new viewer uses system fonts and does not redistribute the Cybercab project's Manrope font.

@@ -1,0 +1,15 @@
+/* Version 1.2 additions inherit the Atlas's existing palette and component shapes. */
+.av-frame{display:block;width:100%;height:1260px;border:0;border-radius:18px;background:#fff}
+.av-open{text-align:center;margin:0 0 20px}.av-open a{font-weight:600}
+#filters .gf-side{position:static;transform:none;width:100%;height:auto;max-height:none;box-shadow:var(--shadow);border-radius:18px;z-index:auto;background:#fff;visibility:visible;pointer-events:auto}
+#filters .gf-head{padding:22px 24px 12px}#filters .gf-head h2{font-size:22px}#gfClose,#gfScrim{display:none}
+#filters .gf-body{overflow:visible;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:14px 24px;align-items:start}
+#filters .gf-group{border:1px solid var(--line);border-radius:12px;padding:0 10px;min-width:0}#filters .gf-vals{max-height:210px;overflow:auto;padding-bottom:10px;scrollbar-color:#b7c0cb #f5f5f7}
+#filters .gf-foot{border-radius:0 0 18px 18px}#filters .gf-scope b{color:var(--ink2)}
+#filters .gf-chips{margin-bottom:16px}.sim-opts{grid-template-columns:minmax(0,1.8fr) repeat(3,minmax(0,1fr))}#optVeh{flex-wrap:wrap}#optVeh button{font-size:12px}
+.sim-touch{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin:12px 0}.sim-touch button{padding:9px 17px;border:1px solid var(--line);border-radius:12px;background:#fff}.sim-touch span{color:var(--ink2);font-size:12px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.nav-links{min-width:0}.section{scroll-margin-top:75px}.av-loading{padding:30px;text-align:center;color:var(--ink2)}
+@media(max-width:950px){.sim-opts{grid-template-columns:repeat(2,minmax(0,1fr))}#filters .gf-body{grid-template-columns:repeat(2,minmax(0,1fr))}.av-frame{height:1620px}}
+@media(max-width:600px){#filters .gf-body{grid-template-columns:1fr;padding:12px}#filters .gf-head{padding:18px 14px}.sim-opts{grid-template-columns:1fr}.sim-controls{gap:6px}.sim-btns{flex-wrap:wrap}.sim-hud{max-width:135px}.sim-meters{min-width:0;padding:9px}.sim-help{font-size:10px}.av-frame{height:1800px}main{padding-left:14px;padding-right:14px}.nav-inner{padding:0 12px}.brand{font-size:13px}.nav-links a{padding:7px 9px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{scroll-behavior:auto!important}}
+@media(max-width:600px){.sim-hud{max-width:none;width:180px}.sim-meters{width:100%;grid-template-columns:minmax(0,1fr) 60px;gap:4px 6px;font-size:10px}.sim-meters .val{overflow-wrap:anywhere}.gf-fab{display:none}.sim-help{bottom:110px}.sim-mousehint{display:none}}

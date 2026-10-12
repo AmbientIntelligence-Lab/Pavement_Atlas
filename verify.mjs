@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {readFile,access} from 'node:fs/promises';
+import vm from 'node:vm';
+const root=new URL('./',import.meta.url),html=await readFile(new URL('index.html',root),'utf8');
+const expected=['geo','modal','ann','acq','viewpoint','tasks','distress','av-models','drive','register','gallery','filters','readiness','submit'];
+assert.deepEqual([...html.matchAll(/<section class="section" id="([^"]+)"/g)].map(m=>m[1]),expected);
+const markup=html.split('<script')[0],ids=[...markup.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+assert.equal(new Set(ids).size,ids.length,'Duplicate HTML IDs');
+for(const m of markup.matchAll(/href="#([^"]+)"/g))assert(ids.includes(m[1]),`Missing anchor ${m[1]}`);
+const records=JSON.parse(html.match(/const DATA = (\[[^\n]+\]);/)[1]);assert.equal(records.length,177);
+assert.equal(new Set(records.map(r=>r.id)).size,177);
+try{const original=await readFile(new URL('../Pavement_Atlas_website/index.html',root),'utf8');assert.deepEqual(records,JSON.parse(original.match(/const DATA = (\[[^\n]+\]);/)[1]),'Dataset inventory must remain unchanged');}catch(e){if(e.code!=='ENOENT')throw e;}
+const vehicles=html.match(/const VEHICLES=\{([\s\S]*?)\n\};/)[1];for(const name of ['Waymo I-PACE','Cybercab','Aurora truck','Rivian EDV'])assert(vehicles.includes(name));
+assert(html.includes('model=AtlasFleet.createFleetModel(kind)'));assert(!html.includes("if(kind==='sedan')"));
+for(const match of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g))new vm.Script(match[1]);
+for(const file of ['assets/fleet-runtime.js','src/atlas-integration.js'])new vm.Script(await readFile(new URL(file,root),'utf8'));
+const av=await readFile(new URL('av-model-simulation.html',root),'utf8');assert(!av.includes('/*APP*/'));assert(!/<script[^>]+src=/.test(av),'Standalone viewer must bundle its runtime');
+for(const match of av.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(match[1]);
+const assets=new Set([...html.matchAll(/(?:src|href)=["']((?:assets|src|data)\/[^"']+)["']/g)].map(m=>m[1]));
+for(const asset of assets)await access(new URL(asset,root));
+console.log(`PASS: ordered modules, navigation targets, unique IDs, 177 unchanged records, four fleet vehicles, script syntax, standalone bundle and ${assets.size} local assets.`);
