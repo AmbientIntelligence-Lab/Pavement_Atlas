@@ -8,4 +8,10 @@ window.addEventListener('message',e=>{
 });
 // Semantic access for dynamically rebuilt dataset tiles.
 const enhance=()=>document.querySelectorAll('.clickable,.task-row,.geo-row,.ds-name,.dcard').forEach(el=>{if(el.dataset.keyboard)return;el.dataset.keyboard='true';el.tabIndex=0;el.setAttribute('role','button');el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});});
-new MutationObserver(enhance).observe(document.querySelector('main'),{childList:true,subtree:true});enhance();
+function initializeKeyboardAccess(){
+ const main=document.querySelector('main');
+ if(main)new MutationObserver(enhance).observe(main,{childList:true,subtree:true});
+ enhance();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initializeKeyboardAccess,{once:true});
+else initializeKeyboardAccess();
